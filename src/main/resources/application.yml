@@ -1,0 +1,21 @@
+server:
+  error:
+    include-message: always
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web.socket: DEBUG
+    org.springframework.messaging: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/development
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database: postgresql
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
