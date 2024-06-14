@@ -1,7 +1,8 @@
 package br.com.noe.hydra.controllers;
 
 import br.com.noe.hydra.controllers.interfaces.IUserController;
-import br.com.noe.hydra.dtos.user.UserRequestDTO;
+import br.com.noe.hydra.dtos.user.CreateUserAndAccountResponseDTO;
+import br.com.noe.hydra.dtos.user.CreateUserRequestDTO;
 import br.com.noe.hydra.exception.BussinessException;
 import br.com.noe.hydra.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,8 @@ public class UserController implements IUserController {
     private final UserService userService;
 
     @Override
-    public ResponseEntity<Void> createUser(UserRequestDTO userRequestDTO) throws BussinessException {
-        userService.create(userRequestDTO);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<CreateUserAndAccountResponseDTO> createUser(CreateUserRequestDTO createUserRequestDTO) throws BussinessException {
+        return new ResponseEntity<>(userService.create(createUserRequestDTO), HttpStatus.CREATED);
     }
 
 }

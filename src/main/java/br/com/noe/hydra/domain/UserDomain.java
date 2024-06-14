@@ -1,5 +1,6 @@
 package br.com.noe.hydra.domain;
 
+import br.com.noe.hydra.models.BankAccount;
 import br.com.noe.hydra.models.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,15 +16,19 @@ public class UserDomain {
     private String email;
     private String cellphone;
     private String password;
+    private BankAccountDomain bankAccountDomain;
 
-    public static User userDomainToUser(UserDomain userDomain) {
+    public User userDomainToUser() {
         User user = new User();
 
-        user.setId(userDomain.getId());
-        user.setName(userDomain.getName());
-        user.setEmail(userDomain.getEmail());
-        user.setCellphone(userDomain.getCellphone());
-        user.setPassword(userDomain.getPassword());
+        user.setId(this.id);
+        user.setName(this.name);
+        user.setEmail(this.email);
+        user.setCellphone(this.cellphone);
+        user.setPassword(this.password);
+        if (this.bankAccountDomain != null) {
+            user.setBankAccount(this.bankAccountDomain.bankAccountDomainToBankAccountByCreate());
+        }
 
         return user;
     }

@@ -1,6 +1,8 @@
 package br.com.noe.hydra.services;
 
-import br.com.noe.hydra.dtos.user.UserRequestDTO;
+import br.com.noe.hydra.domain.UserDomain;
+import br.com.noe.hydra.dtos.user.CreateUserAndAccountResponseDTO;
+import br.com.noe.hydra.dtos.user.CreateUserRequestDTO;
 import br.com.noe.hydra.exception.BussinessException;
 import br.com.noe.hydra.models.User;
 import br.com.noe.hydra.repositories.UserRepository;
@@ -16,18 +18,20 @@ import java.util.Optional;
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+    private final BankAccountService bankAccountService;
 
     @Override
-    public void create(UserRequestDTO userRequestDTO) throws BussinessException {
-        Optional<User> user = userRepository.findByEmailOrCellphone(userRequestDTO.getEmail(), userRequestDTO.getCellphone());
+    public CreateUserAndAccountResponseDTO create(CreateUserRequestDTO createUserRequestDTO) throws BussinessException {
+        Optional<User> user = userRepository.findByEmailOrCellphone(createUserRequestDTO.getEmail(), createUserRequestDTO.getCellphone());
 
         if (user.isPresent()) {
             throw new BussinessException("User already exists", HttpStatus.BAD_REQUEST);
         }
 
-        User newUser = UserRequestDTO.userRequestDTOToUser(userRequestDTO);
+        UserDomain newUser = createUserRequestDTO.userRequestDTOToUserDomain();
+        User createdUser = userRepository.save(newUser.userDomainToUser());
 
-        userRepository.save(newUser);
+        return new CreateUserAndAccountResponseDTO(bankAccountService.create(createUserRequestDTO.getAgency(), createUserRequestDTO.getBank(), createdUser));
     }
 
 }

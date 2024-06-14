@@ -1,17 +1,12 @@
 package br.com.noe.hydra.dtos.user;
 
 import br.com.noe.hydra.domain.UserDomain;
-import br.com.noe.hydra.models.User;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import br.com.noe.hydra.enums.Bank;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.validation.annotation.Validated;
 
 @Getter
-@Setter
-public class UserRequestDTO {
+public class CreateUserRequestDTO {
 
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     @NotBlank(message = "Name cannot be empty")
@@ -29,15 +24,24 @@ public class UserRequestDTO {
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
-    public static User userRequestDTOToUser(UserRequestDTO userRequestDTO) {
-        User user = new User();
+    @NotNull(message = "Agency is required")
+    @Positive(message = "Agency must be a valid value")
+    public Integer agency;
 
-        user.setName(userRequestDTO.getName());
-        user.setEmail(userRequestDTO.getEmail());
-        user.setCellphone(userRequestDTO.getCellphone());
-        user.setPassword(userRequestDTO.getPassword());
+    @NotNull(message = "Bank is required")
+    public Bank bank;
+
+    public UserDomain userRequestDTOToUserDomain() {
+        UserDomain user = new UserDomain();
+
+        user.setName(this.name);
+        user.setEmail(this.email);
+        user.setCellphone(this.cellphone);
+        user.setPassword(this.password);
 
         return user;
     }
 
 }
+
+
