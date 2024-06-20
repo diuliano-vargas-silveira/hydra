@@ -1,5 +1,6 @@
 package br.com.noe.hydra.models;
 
+import br.com.noe.hydra.enums.TransactionsTypes;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "bank_transfer")
-public class BankTransfer {
+public class BankTransaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +19,14 @@ public class BankTransfer {
     private Long id;
 
     private String message;
-    private BigDecimal transferValue;
+    private BigDecimal value;
+    @Enumerated
+    private TransactionsTypes transactionsType;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private BankAccount origin;
+    private BankAccount originBankAccount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BankAccount destinationBankAccount;
 
 }

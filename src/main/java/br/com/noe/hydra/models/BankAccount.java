@@ -31,8 +31,11 @@ public class BankAccount {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "origin", fetch = FetchType.LAZY)
-    private List<BankTransfer> bankTransfers;
+    @OneToMany(mappedBy = "originBankAccount", fetch = FetchType.LAZY)
+    private List<BankTransaction> originBankTransactions;
+
+    @OneToMany(mappedBy = "destinationBankAccount", fetch = FetchType.LAZY)
+    private List<BankTransaction> bankTransactions;
 
     public BankAccount(String agency, Bank bank, Integer account, User user) {
         this.agency = agency;
@@ -40,7 +43,7 @@ public class BankAccount {
         this.account = account;
         this.user = user;
         this.balance = BigDecimal.ZERO;
-        this.bankTransfers = new ArrayList<>();
+        this.bankTransactions = new ArrayList<>();
     }
 
 }

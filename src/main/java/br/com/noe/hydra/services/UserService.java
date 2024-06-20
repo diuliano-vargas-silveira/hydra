@@ -22,16 +22,28 @@ public class UserService implements IUserService {
 
     @Override
     public CreateUserAndAccountResponseDTO create(CreateUserRequestDTO createUserRequestDTO) throws BussinessException {
-        Optional<User> user = userRepository.findByEmailOrCellphone(createUserRequestDTO.getEmail(), createUserRequestDTO.getCellphone());
+        var user = findOptionalByEmailOrCellphone(createUserRequestDTO.getEmail(), createUserRequestDTO.getCellphone());
 
         if (user.isPresent()) {
             throw new BussinessException("User already exists", HttpStatus.BAD_REQUEST);
         }
 
-        UserDomain newUser = createUserRequestDTO.userRequestDTOToUserDomain();
-        User createdUser = userRepository.save(newUser.userDomainToUser());
+        var newUser = createUserRequestDTO.userRequestDTOToUserDomain();
+        var createdUser = userRepository.save(newUser.userDomainToUser());
 
         return new CreateUserAndAccountResponseDTO(bankAccountService.create(createUserRequestDTO.getAgency(), createUserRequestDTO.getBank(), createdUser));
     }
+
+    @Override
+    public User findByEmailOrCellphone(String email, String cellphone) throws BussinessException {
+        return findOptionalByEmailOrCellphone(email, cellphone).orElseThrow(
+                () -> new BussinessException("User not found", HttpStatus.NOT_FOUND)
+        );
+    }
+
+    private Optional<User> findOptionalByEmailOrCellphone(String email, String cellphone) {
+        return userRepository.findByEmailOrCellphone(email, cellphone);
+    }
+
 
 }
