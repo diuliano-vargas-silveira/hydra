@@ -1,10 +1,9 @@
 package br.com.noe.hydra.services;
 
-import br.com.noe.hydra.domain.UserDomain;
 import br.com.noe.hydra.dtos.user.CreateUserAndAccountResponseDTO;
 import br.com.noe.hydra.dtos.user.CreateUserRequestDTO;
 import br.com.noe.hydra.exception.BussinessException;
-import br.com.noe.hydra.models.User;
+import br.com.noe.hydra.domain.models.User;
 import br.com.noe.hydra.repositories.UserRepository;
 import br.com.noe.hydra.services.interfaces.IUserService;
 import lombok.RequiredArgsConstructor;

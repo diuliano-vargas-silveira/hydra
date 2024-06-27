@@ -1,4 +1,4 @@
-package br.com.noe.hydra.models;
+package br.com.noe.hydra.domain.models;
 
 import br.com.noe.hydra.enums.Bank;
 import jakarta.persistence.*;

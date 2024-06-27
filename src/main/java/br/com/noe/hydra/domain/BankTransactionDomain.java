@@ -2,8 +2,8 @@ package br.com.noe.hydra.domain;
 
 import br.com.noe.hydra.dtos.bank_transaction.BankTransactionRequestDTO;
 import br.com.noe.hydra.enums.TransactionsTypes;
-import br.com.noe.hydra.models.BankAccount;
-import br.com.noe.hydra.models.BankTransaction;
+import br.com.noe.hydra.domain.models.BankAccount;
+import br.com.noe.hydra.domain.models.BankTransaction;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,6 @@
 package br.com.noe.hydra.domain;
 
-import br.com.noe.hydra.models.BankAccount;
-import br.com.noe.hydra.models.User;
+import br.com.noe.hydra.domain.models.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

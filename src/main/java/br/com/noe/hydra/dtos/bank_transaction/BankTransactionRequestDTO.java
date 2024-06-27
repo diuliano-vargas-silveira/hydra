@@ -2,6 +2,7 @@ package br.com.noe.hydra.dtos.bank_transaction;
 
 import br.com.noe.hydra.enums.Bank;
 import br.com.noe.hydra.enums.TransactionsTypes;
+import br.com.noe.hydra.validators.ValidBankTransaction;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Getter
+@ValidBankTransaction
 public class BankTransactionRequestDTO {
 
     @NotNull(message = "Value is required")

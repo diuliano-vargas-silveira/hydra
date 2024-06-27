@@ -2,8 +2,8 @@ package br.com.noe.hydra.services.interfaces;
 
 import br.com.noe.hydra.enums.Bank;
 import br.com.noe.hydra.exception.BussinessException;
-import br.com.noe.hydra.models.BankAccount;
-import br.com.noe.hydra.models.User;
+import br.com.noe.hydra.domain.models.BankAccount;
+import br.com.noe.hydra.domain.models.User;
 
 public interface IBankAccountService {
 

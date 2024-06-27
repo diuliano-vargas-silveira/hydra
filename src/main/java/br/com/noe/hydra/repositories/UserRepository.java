@@ -1,6 +1,6 @@
 package br.com.noe.hydra.repositories;
 
-import br.com.noe.hydra.models.User;
+import br.com.noe.hydra.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

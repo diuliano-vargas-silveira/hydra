@@ -21,10 +21,6 @@ public class BankTransactionService implements IBankTransactionService {
     private final UserService userService;
 
     public void bankTransaction(BankTransactionRequestDTO bankTransactionRequestDTO) throws BussinessException {
-        if (Objects.isNull(bankTransactionRequestDTO.getEmail()) && Objects.isNull(bankTransactionRequestDTO.getCellphone())) {
-            throw new BussinessException("Email or cellphone is required", HttpStatus.BAD_REQUEST);
-        }
-
         var user = userService.findByEmailOrCellphone(bankTransactionRequestDTO.getEmail(), bankTransactionRequestDTO.getCellphone());
 
         BankAccountDomain bankAccountToTransfer = null;

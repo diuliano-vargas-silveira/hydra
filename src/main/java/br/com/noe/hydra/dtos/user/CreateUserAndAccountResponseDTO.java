@@ -1,6 +1,6 @@
 package br.com.noe.hydra.dtos.user;
 
-import br.com.noe.hydra.models.BankAccount;
+import br.com.noe.hydra.domain.models.BankAccount;
 import lombok.Getter;
 
 @Getter
